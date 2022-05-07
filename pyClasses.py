@@ -156,39 +156,6 @@ class Grid2D:
         self.C.update({"plasmaFreqDT": self.dt * self.C["plasmaFreq"]})
         self.C.update({"qBackground": -self.C["plasmaFreqDT"] ** 2 / 2.})
 
-    def __copy__(self):
-
-        """
-
-        Method to create a deep copy of a Grid2D object
-
-        ** NOTE: Copying a grid object requires copying each particle contained in the grid separately **
-
-        Parameters
-        ----------
-        None
-
-        Raises
-        -------
-        None
-
-        Returns
-        -------
-        GNew: Grid2D object containing the same attributes which the original object contained
-
-        """
-
-        Gnew = Grid2D(self.L, self.Ng, self.dt, self.T)
-        # iterate over each particle and make a shallow copy of it
-        for i in range(len(self.Particles)):
-            Gnew.Particles = np.append(Gnew.Particles, self.Particles[i].__copy__())
-
-        # update, in the new grid, the average particles per cell and the change in value
-        Gnew.C.update({"avgParticlesPerCell": len(Gnew.Particles) / Gnew.Ng ** 2})
-        Gnew.C.update(
-            {"delChg": Gnew.C["plasmaFreqDT"] ** 2 * Gnew.Ng ** 2 / (2. * len(Gnew.Particles))})
-        return Gnew
-
     def addParticle(self, p):
 
         """
