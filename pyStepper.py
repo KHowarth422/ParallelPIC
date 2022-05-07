@@ -368,121 +368,7 @@ def RunDiscreteModel(g, debug=False):
         DiscreteModelStep(g, debug)
         t += 1
 
-
-def check_particle_validity(particles):
-
-    """
-
-    Method to check the validity of the inputed particles to be simulated (as entered by the user)
-
-    Parameters
-    ----------
-    particles: list of Particle2D objects to be simulated
-
-    Raises
-    -------
-    TypeError: Type error is raised if objects in particles list are not all Particle2D
-    ValueError: Value error is raised if an empty list of particles is passed in
-
-    Returns
-    -------
-    None
-
-    """
-
-    # ensure the user is simulating at least one particle
-    if particles is None or len(particles) < 1:
-        raise ValueError("ERROR: At least one Particle2D object must be passed in")
-
-    # iterate over each particle to ensure it is of Particle2D type, otherwise raise an illegal type error
-    for particle in particles:
-        if not isinstance(particle, Particle2D):
-            raise TypeError("ERROR: All input particles must be Particle2D objects")
-
-    # warn the user of simulating too few particles but do not raise an error
-    if len(particles) < 2:
-        print("WARNING: Particle simulation yields the best results with more than 1 particle ")
-
-
-def check_general_user_input_validity(L, Ng, dt, T):
-
-    """
-
-    Method to check the validity of the inputed initial conditions of the simluation (as entered by the user)
-
-    Parameters
-    ----------
-    L: length of simulation grid
-    Ng: number of cells in grid
-    dt: time step size
-    T: simulation time
-
-    Raises
-    -------
-    TypeError: Type error is raised if some or all of the initial conditions are not passed in
-    ValueError: Value error is raised if data types or signs of initial conditions are not appropriate
-
-    Returns
-    -------
-    None
-
-    """
-
-    # ensure the user is not passing in empty inital start conditions
-    if L is None or Ng is None or dt is None or T is None:
-        raise TypeError("ERROR: Grid Length, number of cells, time step, and simulation time can not be of Type None")
-
-    # ensure that the grid length is an integer
-    if not isinstance(L, int):
-        raise ValueError("ERROR: Grid Length must be an integer")
-
-    # ensure that the number of cells in the grid is an integer
-    if not isinstance(Ng, int):
-        raise ValueError("ERROR: Number of cells in grid must be an integer ")
-
-    # ensure that the time step is a numeric value
-    if not isinstance(dt, (float, int)):
-        raise ValueError("ERROR: Time Step must be a float or integer ")
-
-    # ensure that the simulation ending time is a numeric value
-    if not isinstance(T, (float, int)):
-        raise ValueError("ERROR: Simulation time must be a float or integer ")
-
-    # ensure that the grid length is positive
-    if L <= 0:
-        raise ValueError("ERROR: Grid Length must be a positive value")
-
-    # ensure that the number of cells in the grid is positive
-    if Ng <= 0:
-        raise ValueError("ERROR: Number of cells in grid must be a positive value")
-
-    # ensure that the time step is positive
-    if dt <= 0:
-        raise ValueError("ERROR: Time Step must be a positive value")
-
-    # ensure that the simulation time is positive
-    if T <= 0:
-        raise ValueError("ERROR: Simulation time must be a positive value")
-
-    # ensure that mesh spacing is no greater in order than the Debye length
-    if L / Ng > C["debyeLength"]:
-        print(
-            "WARNING: Mesh Spacing L/Ng is greater than Debye length. "
-            " \n To increase physical accuracy, try using more grid points or a smaller grid.")
-
-    # ensure that the timestep is small enough to capture the plasma frequency
-    if dt * C["plasmaFreq"] > 2:
-        print(
-            "WARNING: Time-step dt may be too large compared to the plasma frequency. "
-            "\n To increase physical accuracy, try decreasing the time-step size.")
-
-    # ensure that the grid length is much less than the debeye length
-    if L < 10 * C["debyeLength"]:
-        print(
-            "WARNING: Grid size L is not much larger than the Debye Length. "
-            "\n To accurately resolve Debye shielding, try increasing the grid length.")
-
-
+        
 def run_simulations(L, Ng, dt, T, particles, simMode):
 
     """
@@ -509,10 +395,6 @@ def run_simulations(L, Ng, dt, T, particles, simMode):
     None
 
     """
-
-    # check the validity of the user-inputted particles and initial conditions
-    check_particle_validity(particles)
-    check_general_user_input_validity(L, Ng, dt, T)
 
     # initialize a grid with inputted conditions
     G = Grid2D(L=L, Ng=Ng, dt=dt, T=T)
@@ -605,7 +487,3 @@ def run_simulations(L, Ng, dt, T, particles, simMode):
         print("Output data processed successfully.")
 
         # any further analysis needed specifically for the C++ code can be done here
-
-    # animate
-    # note: this line gives "ImportError: Only works inside an IPython Notebook"
-    # G.animateState()
