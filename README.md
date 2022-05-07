@@ -9,15 +9,16 @@ It builds on the previous work of two of the authors (See: [TinyPIC](https://git
 porting the algorithmic code from Python into C++ and instrumenting it for high-performance operation. Using a shared-memory
 model facilitated by OpenMP, we obtain impressive strong-scaling results, illustrated in the figure and table below. 
  
-![Strong scaling results](url here)
+![Strong scaling results](https://github.com/KHowarth422/ParallelPIC/blob/main/milestone/5/strong-scaling.PNG)
 
 We achieve nearly ideal scaling for the first 8 threads, followed by a linear increase up to 21x speedup for 32 threads.
 These results were obtained by exploiting techniques such as cache locality, careful selection of data structures, intelligent scheduling,
 and a good NUMA first-touch policy.
 
 The code was written as a final project for the Spring 2022 Semester of CS 205 High Performance Computing for Science
-and Engineering at Harvard University.
- 
+and Engineering at Harvard University. Thus, some reports and presentation slides detailing further development details
+results are included in the **milestone/** directory. In particular, a final report is available in
+[milestone/5/report.pdf](https://github.com/KHowarth422/ParallelPIC/blob/main/milestone/5/report.pdf).
  
 ## Authors:
 
@@ -50,13 +51,7 @@ and Engineering at Harvard University.
 * **development_and_testing/runPICAlgorithm.py:** Development file for testing PIC algorithm performance. Not intended for use by users.
 * **sample_inputs/python/particle_2D_input_ex_1.csv:** Input file to test our algorithm in Python using custom initial particle conditions for 3 particles.
 * **sample_inputs/python/particle_2D_input_ex_swirl.csv:** Input file to test our algorithm in Python using custom initial particle conditions for 8 particles.
-* **milestone/:**  All files within this directory pertain to milestones assigned over the course of this project.
-  
- 
- 
- 
- 
- 
+* **milestone/:**  All files within this directory pertain to milestones assigned over the course of this project. 
  
 ## **3. Build Requirements:**
  
