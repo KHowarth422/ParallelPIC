@@ -2,8 +2,6 @@
  
 ## Abstract:
  
- The Particle-In-Cell (PIC) algorithm is widely used to simulate the physics of plasmas because of its O(N) scaling with the number of particles N compared to the O(N^2) runtime of a direct N-body simulation. However, as the number of particles in plasmas can exceed 10^18 particles per cubic meter, a serial implementation of the PIC algorithm becomes exceedingly time consuming and unrealistic. The PIC algorithm functions by interpolating particles to and from a grid on which it solves the Poisson equation. Each of the steps involved in this process are naturally parallelizable. We show that a parallel implementation of the PIC algorithm with 32 threads in a shared memory model can achieve up to a 21x speedup compared to a serial implementation when considering a large number of particles and grid points. We request resources from an HPC architecture to use our parallel implementation to simulate a two-stream instability in a plasma. This computation requires 217.8 core hours.
- 
 This code implements a high-performance Electrostatic Particle-in-Cell method for plasma simulation.
 It builds on the previous work of two of the authors (See: [TinyPIC](https://github.com/KHowarth422/TinyPIC)) by 
 porting the algorithmic code from Python into C++ and instrumenting it for high-performance operation. Using a shared-memory
