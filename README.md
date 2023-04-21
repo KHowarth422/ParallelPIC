@@ -20,8 +20,8 @@ results are included in the **milestone/** directory. In particular, a final rep
  
 ## Authors:
 
-- Kevin Howarth (Corresponding Author; contact: khowarth@g.harvard.edu)
-- Aditi Memani
+- Kevin Howarth 
+- Aditi Memani 
 - Hari Raval
 - Taro Spirig
  
